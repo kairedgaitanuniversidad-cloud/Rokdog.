@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>RokDog</title>
+  <link rel="stylesheet" href="estilos.css">
+  <link rel="icon" type="image/icon" href="https://i.postimg.cc/ZYL0GvXf/Recurso-2.png" width="70" height="70">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+
+  <div class="notification" id="notification">
+    Producto agregado al carrito
+  </div>
+
+  <div class="navegador">
+    <div class="logo-buscador">
+      <a href="index.html" class="logo">
+        <img src="https://i.postimg.cc/wM9Mt9Rc/Recurso-1.png" width="200" height="40">
+      </a>
+      <div class="buscador">
+        <input type="text" placeholder="Buscar productos...">
+        <button><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+    
+    <div class="iconos">
+      <div class="icono icono-usuario">
+        <i class="fas fa-user"></i>
+        <span id="usuario-texto">Iniciar sesión</span>
+        <div class="usuario-menu">
+          <h3>Mi cuenta</h3>
+          <ul>
+           <li><a href="iniciar sesion.html" target="_blank"><i class="fas fa-sign-in-alt"></i>Iniciar sesión</a></li>
+            <li><a href="registrarse.html" target="_blank"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="icono icono-favoritos">
+        <i class="fas fa-heart"></i>
+        <span>Favoritos</span>
+        <div class="favoritos-menu">
+          <h3>Tus favoritos</h3>
+          <ul>
+            <li>
+              <div class="favorito-item">
+                <img src="https://i.postimg.cc/xTwTCVBC/2626-Smartbones-Pollo-Mini-8-Unidades-500-X500-removebg-preview.png" width="50" height="50">
+                <span>Smartbones Pollo Mini</span>
+                <button class="add-to-cart-fav" data-name="Smartbones Pollo Mini X 8 Unidades">Añadir</button>
+              </div>
+            </li>
+            <li>
+              <div class="favorito-item">
+                <img src="https://i.postimg.cc/XYFsd9qW/463-62519-Royal-Canin-Medium-Adulto-1616625484-2186x2186-removebg-preview.png" width="50" height="50">
+                <span>Royal Canin Medium</span>
+                <button class="add-to-cart-fav" data-name="Royal Canin - Medium Adult">Añadir</button>
+              </div>
+            </li>
+            <li>
+              <div class="favorito-item">
+                <img src="https://i.postimg.cc/pdSMrD6H/2d3e5bc54e7edd029a290fa69193397b-1673042473-removebg-preview.png" width="50" height="50">
+                <span>Besties Huesos</span>
+                <button class="add-to-cart-fav" data-name="Besties-Huesos Masticables Medianos">Añadir</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="icono icono-tema">
+        <i class="fas fa-moon"></i>
+        <span>Modo</span>
+      </div>
+      
+      <div class="icono icono-carrito">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Carrito</span>
+        <div class="contador-carrito" id="contadorCarrito">2</div>
+        <div class="carrito-menu">
+          <h3>Tu carrito</h3>
+          <div class="carrito-items" id="carritoItems">
+            <div class="carrito-item">
+              <img src="https://i.postimg.cc/xTwTCVBC/2626-Smartbones-Pollo-Mini-8-Unidades-500-X500-removebg-preview.png" alt="Producto">
+              <div class="carrito-item-info">
+                <div class="carrito-item-titulo">Smartbones Pollo Mini X 8 Unidades</div>
+                <div class="carrito-item-precio">$18.360</div>
+              </div>
+            </div>
+            <div class="carrito-item">
+              <img src="https://i.postimg.cc/XYFsd9qW/463-62519-Royal-Canin-Medium-Adulto-1616625484-2186x2186-removebg-preview.png" alt="Producto">
+              <div class="carrito-item-info">
+                <div class="carrito-item-titulo">Royal Canin - Medium Adult</div>
+                <div class="carrito-item-precio">$30.000</div>
+              </div>
+            </div>
+          </div>
+          <div class="carrito-total">
+            <span>Total:</span>
+            <span id="carritoTotal">$48.360</span>
+          </div>
+          <div class="carrito-acciones">
+            <button class="carrito-vaciar" id="vaciarCarrito">Vaciar</button>
+            <button class="carrito-comprar" id="comprarCarrito">Comprar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Modal de pago -->
+<div class="modal-pago" id="modalPago">
+  <div class="modal-contenido">
+    <span class="cerrar-modal" id="cerrarModal">&times;</span>
+    <h3>Selecciona tu método de pago</h3>
+    
+    <div class="metodo-pago" data-metodo="nequi">
+      <h4><i class="fas fa-mobile-alt"></i> Nequi</h4>
+      <p>Paga con tu cuenta Nequi</p>
+      <p>Número: 312 290 3059</p>
+    </div>
+    
+    <div class="metodo-pago" data-metodo="tarjeta">
+      <h4><i class="far fa-credit-card"></i> Tarjeta de crédito/débito</h4>
+      <p>Paga con tu tarjeta Visa, Mastercard o American Express</p>
+    </div>
+    
+    <button class="btn-confirmar-pago" id="confirmarPago">Confirmar pago</button>
+  </div>
+</div>
+
+<!-- Modal de éxito -->
+<div class="modal-pago" id="modalExito">
+  <div class="modal-contenido">
+    <div class="modal-exito">
+      <i class="fas fa-check-circle"></i>
+      <h3>¡Compra realizada con éxito!</h3>
+      <p>Tu pedido ha sido procesado correctamente.</p>
+      <button class="btn-confirmar-pago" id="cerrarExito">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+  
+
+  <div class="container-principal">
+    <section id="hero">
+      <div class="titulo-hero1">
+      <h1><br>MASCOTAS FELICES,<br> DUEÑOS FELICES</h1>
+       <h2>¡Ven y descubre!</h2>
+      <button>Comprar ahora </button>
+      </div>
+    </section>
+<section id="categoria">
+  <div class="categoria-titulo">
+    <h3>Categorías</h3>
+  </div>
+  <div class="categoria-container">
+    <!-- Categoría Alimento -->
+    <button class="categoria-column categoria-btn" onclick="window.location.href='Alimento (2).html'">
+      <div class="categoria-header">         
+        <img src="https://i.postimg.cc/QtpC70h2/comida.png" alt="comida" class="categoria-imagen" width="120" height="130">
+        <h5>Alimento</h5>
+      </div>
+    </button>
+
+    <!-- Categoría Juguetes -->
+    <button class="categoria-column categoria-btn" onclick="window.location.href='juguetes.html'">
+      <div class="categoria-header"> 
+        <img src="https://i.postimg.cc/h41hPyCx/juguetes.png" alt="juguetes" class="categoria-imagen" width="150" height="120">
+        <h5>Juguetes</h5>
+      </div>
+    </button>
+
+    <!-- Categoría Accesorios -->
+    <button class="categoria-column categoria-btn" onclick="window.location.href='accesorios.html'">
+      <div class="categoria-header">
+        <img src="https://i.postimg.cc/nc688Zv1/accesorios.png" alt="Accesorios" class="categoria-imagen" width="90" height="120">
+        <h5>Accesorios</h5>
+      </div>
+    </button>
+
+    <!-- Categoría Cosméticos -->
+    <button class="categoria-column categoria-btn" onclick="window.location.href='cosmeticos.html'">
+      <div class="categoria-header">
+        <img src="https://i.postimg.cc/FHcMNqpX/cosm-ticos.png" alt="Cosméticos" class="categoria-imagen" width="110" height="120">
+        <h5>Cosméticos</h5>
+      </div>
+    </button>
+  </div>
+
+</section>
+
+    <section id="hero3">
+      <div class="titulo-hero3">
+ <h1>HAZ FELIZ A TU PERRO,<br>QUE LA DIVERSIÓN NO FALTE</h1>
+      <h2>Lo mejor para jugar lo encuentras aquí</h2>
+      </div>
+     
+    </section>
+
+<!-- Reemplaza la sección Favoritos actual con este código -->
+<section id="Favoritos">
+  <div class="Favoritos-titulo">
+    <h3>Favoritos RokDog</h3>
+  </div>
+  
+  <div class="carousel-container-fav">
+    <button class="carousel-btn-fav prev-fav" onclick="moveCarouselFav(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="carousel-btn-fav next-fav" onclick="moveCarouselFav(1)"><i class="fas fa-chevron-right"></i></button>
+    
+    <div class="carousel-fav" id="carouselFav">
+      <!-- Producto 1 -->
+      <div class="Favoritos-column">
+        <div class="Favoritos-header">          
+          <img src="https://i.postimg.cc/xTwTCVBC/2626-Smartbones-Pollo-Mini-8-Unidades-500-X500-removebg-preview.png" class="Favoritos-imagen">
+          <h5>Smartbones Pollo Mini X 8 Unidades</h5>
+          <h5>$18.360</h5>
+          <button class="add-to-cart-fav" data-name="Smartbones Pollo Mini X 8 Unidades">Comprar</button>
+        </div>
+      </div>
+      
+      <!-- Producto 2 -->
+      <div class="Favoritos-column">
+        <div class="Favoritos-header"> 
+          <img src="https://i.postimg.cc/pdSMrD6H/2d3e5bc54e7edd029a290fa69193397b-1673042473-removebg-preview.png" class="Favoritos-imagen">
+          <h5>Besties-Huesos Masticables Medianos</h5>
+          <h5>$15.000</h5>
+          <button class="add-to-cart-fav" data-name="Besties-Huesos Masticables Medianos">Comprar</button>
+        </div>
+      </div>
+      
+      <!-- Producto 3 -->
+      <div class="Favoritos-column">
+        <div class="Favoritos-header">
+          <img src="https://i.postimg.cc/XYFsd9qW/463-62519-Royal-Canin-Medium-Adulto-1616625484-2186x2186-removebg-preview.png" class="Favoritos-imagen">
+          <h5>Royal Canin - Medium Adult</h5>
+          <h5>$30.000</h5>
+          <button class="add-to-cart-fav" data-name="Royal Canin - Medium Adult">Comprar</button>
+        </div>
+      </div>
+      
+      <!-- Producto 4 -->
+      <div class="Favoritos-column">
+        <div class="Favoritos-header">
+          <img src="https://i.postimg.cc/K8n5RFpv/4156c65bbc6a0f7539f438fa57ef595f-1715718727-removebg-preview.png" class="Favoritos-imagen">
+          <h5>Pedigree-Alimento Húmedo Raza Pequeña</h5>
+          <h5>$2.380</h5>
+          <button class="add-to-cart-fav" data-name="Pedigree-Alimento Húmedo Raza Pequeña">Comprar</button>
+        </div>
+      </div>
+      
+      <!-- Producto 5 -->
+      <div class="Favoritos-column">
+        <div class="Favoritos-header">
+          <img src="https://i.postimg.cc/qq8XX73v/1000105332-removebg-preview.png" class="Favoritos-imagen">
+          <h5>Totto Pets - Cama Alina Gris</h5>
+          <h5>$230.000</h5>
+          <button class="add-to-cart-fav" data-name="Totto Pets - Cama Alina Gris">Comprar</button>
+        </div>
+      </div>
+      
+      <!-- Producto 6 -->
+      <div class="Favoritos-column">
+        <div class="Favoritos-header">
+          <img src="https://i.postimg.cc/SR7NG0Nh/1000105333-removebg-preview.png" class="Favoritos-imagen">
+          <h5>Kong - Extreme Hueso</h5>
+          <h5>$45.000</h5>
+          <button class="add-to-cart-fav" data-name="Kong - Extreme Hueso">Comprar</button>
+        </div>
+      </div>
+      
+      <!-- Producto 7 -->
+      <div class="Favoritos-column">
+        <div class="Favoritos-header">
+          <img src="https://i.postimg.cc/RhnwCZRT/1000105335-removebg-preview.png" class="Favoritos-imagen">
+          <h5>Nina Ottosson - Treat Tumble</h5>
+          <h5>$30.000</h5>
+          <button class="add-to-cart-fav" data-name="Nina Ottosson - Treat Tumble">Comprar</button>
+        </div>
+      </div>
+      
+      <!-- Producto 8 -->
+      <div class="Favoritos-column">
+        <div class="Favoritos-header">
+          <img src="https://i.postimg.cc/3xyqH8Xt/Whats-App-Image-2025-08-17-at-2-32-35-PM-removebg-preview.png" class="Favoritos-imagen">
+          <h5>Paw Day - Peluche Premium Resistente Gato</h5>
+          <h5>$30.000</h5>
+          <button class="add-to-cart-fav" data-name="Paw Day - Peluche Premium Resistente Gato">Comprar</button>
+        </div>
+      </div>
+          <!-- Dentro de la sección #Favoritos, en el div con class="carousel-fav" -->
+<!-- Después del producto 8 existente, agrega estos 4 nuevos productos: -->
+
+<!-- Producto 9 -->
+<div class="Favoritos-column">
+  <div class="Favoritos-header">          
+    <img src="https://i.postimg.cc/25qF6G2Y/1000105328-removebg-preview.png" class="Favoritos-imagen">
+    <h5>Bolsas Biodegradables Aroma Citronella 12 Rollos</h5>
+    <h5>$24.000</h5>
+    <button class="add-to-cart-fav" data-name="Bolsas Biodegradables Aroma Citronella 12 Rollos">Comprar</button>
+  </div>
+</div>
+
+<!-- Producto 10 -->
+<div class="Favoritos-column">
+  <div class="Favoritos-header">          
+    <img src="https://i.postimg.cc/Bn9mRdgF/1000105327-removebg-preview.png" class="Favoritos-imagen">
+    <h5>Fresh Breath - Combo Kit Para Cachorro + 2 Cepillos</h5>
+    <h5>$60.000</h5>
+    <button class="add-to-cart-fav" data-name="Fresh Breath - Combo Kit Para Cachorro + 2 Cepillos">Comprar</button>
+  </div>
+</div>
+
+<!-- Producto 11 -->
+<div class="Favoritos-column">
+  <div class="Favoritos-header">          
+    <img src="https://i.postimg.cc/mkkn2CzF/1000105334-removebg-preview.png" class="Favoritos-imagen">
+    <h5>West Paw - Juguete Rumpus</h5>
+    <h5>$20.000</h5>
+    <button class="add-to-cart-fav" data-name="West Paw - Juguete Rumpus">Comprar</button>
+  </div>
+</div>
+
+<!-- Producto 12 -->
+<div class="Favoritos-column">
+  <div class="Favoritos-header">          
+    <img src="https://i.postimg.cc/9QKnXDCD/1000105329-removebg-preview.png" class="Favoritos-imagen">
+    <h5>Natural Freshly - Jabón Esbelt Pelo Lindo Hembras</h5>
+    <h5>$20.000</h5>
+    <button class="add-to-cart-fav" data-name="Natural Freshly - Jabón Esbelt Pelo Lindo Hembras">Comprar</button>
+  </div>
+</div>
+
+    </div>
+
+    
+    <div class="dots-container-fav" id="dotsContainerFav">
+      <!-- Los puntos se generan automáticamente con JavaScript -->
+    </div>
+  </div>
+</section>
+ 
+  
+ <section class="video-section" style="padding: 40px 0; text-align: center;">
+      <div class="video-container" style="max-width: 800px; margin: 0 auto;">
+        <h3 style="font-size: 2rem; margin-bottom: 20px; color: #FE7703;">Conoce más sobre DogChow</h3>
+        <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/2Zo_MINsPJ4" frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+      </div>
+    </section>
+
+
+<!-- Chatbot IA -->
+<div class="chatbot-container" id="chatbotContainer">
+  <div class="chatbot-header">
+    <h4>Asistente Virtual</h4>
+    <button class="close-chatbot"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chatbot-messages" id="chatbotMessages"></div>
+  <div class="chatbot-input">
+    <input type="text" id="chatbotInput" placeholder="Escribe tu pregunta...">
+    <button id="sendChatbotMessage"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+<button class="chatbot-toggle" id="chatbotToggle">
+  <i class="fas fa-robot"></i>
+</button>
+
+ <footer class="rokdog-footer">
+  <div class="footer-bg-image"></div>
+  <div class="footer-content">
+    
+    <div class="footer-column logo-social">
+      <div class="logo-container">
+        <img src="https://i.postimg.cc/LXB0XTB9/Recurso-3.png" alt="ROKDOG Logo" class="footer-logo">
+      </div>
+      <p class="follow-text">Porque tu mascota merece lo mejor<br> Síguenos en:</p>
+      <div class="social-icons">
+        <a href="#"><img src="https://i.postimg.cc/3Rh6Y6Gg/facebook-187189.png" alt="Facebook" class="social-img"></a>
+        <a href="#"><img src="https://i.postimg.cc/B6ZghGDw/social-15528043.png" alt="Instagram" class="social-img"></a>
+      </div>
+    </div>
+    
+   
+    <div class="footer-column info-column">
+      <h6 class="footer-title">INFORMACIÓN</h6>
+      <h7 class="footer-text">TELÉFONO: 3122903059</h7><br>
+      <h7 class="footer-text">BARRANQUILLA, COLOMBIA</h7>
+    </div>
+
+    <div class="footer-column contact-column">
+       <h6 class="footer-title">CANALES DE ATENCIÓN</h6>
+      <h7 class="footer-text">preguntasrokdog@gmail.com</h7>
+    </div>
+</footer>
+
+<script>
+  // Carrusel de Favoritos - Versión mejorada
+document.addEventListener('DOMContentLoaded', function() {
+    const carouselFav = document.getElementById('carouselFav');
+    const productsFav = document.querySelectorAll('#carouselFav .Favoritos-column');
+    const dotsContainerFav = document.getElementById('dotsContainerFav');
+    
+    let currentIndexFav = 0;
+    let productsPerSlideFav = calculateProductsPerSlideFav();
+    let totalSlides = Math.ceil(productsFav.length / productsPerSlideFav);
+    
+    // Crear puntos de navegación
+    function createDots() {
+        dotsContainerFav.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot-fav');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlideFav(i));
+            dotsContainerFav.appendChild(dot);
+        }
+    }
+    
+    // Función para calcular productos por slide
+    function calculateProductsPerSlideFav() {
+        if (window.innerWidth < 480) return 1;
+        if (window.innerWidth < 768) return 2;
+        if (window.innerWidth < 1024) return 3;
+        return 4;
+    }
+    
+    // Función para actualizar el carrusel
+    function updateCarouselFav() {
+        const offset = -currentIndexFav * 100;
+        carouselFav.style.transform = `translateX(${offset}%)`;
+        
+        // Actualizar puntos activos
+        const dots = document.querySelectorAll('.dot-fav');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndexFav);
+        });
+    }
+    
+    // Función para mover el carrusel
+    window.moveCarouselFav = function(direction) {
+        currentIndexFav = (currentIndexFav + direction + totalSlides) % totalSlides;
+        updateCarouselFav();
+    }
+    
+    // Función para ir a un slide específico
+    function goToSlideFav(index) {
+        currentIndexFav = index;
+        updateCarouselFav();
+    }
+    
+    // Inicializar
+    createDots();
+    updateCarouselFav();
+    
+    // Manejar redimensionamiento
+    window.addEventListener('resize', function() {
+        const newProductsPerSlide = calculateProductsPerSlideFav();
+        if (newProductsPerSlide !== productsPerSlideFav) {
+            productsPerSlideFav = newProductsPerSlide;
+            totalSlides = Math.ceil(productsFav.length / productsPerSlideFav);
+            currentIndexFav = 0;
+            createDots();
+            updateCarouselFav();
+        }
+    });
+    
+    // Touch events para móviles
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carouselFav.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+    
+    carouselFav.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, {passive: true});
+    
+    function handleSwipe() {
+        const difference = touchStartX - touchEndX;
+        if (difference > 50) { // Swipe izquierda
+            moveCarouselFav(1);
+        } else if (difference < -50) { // Swipe derecha
+            moveCarouselFav(-1);
+        }
+    }
+});
+
+  let carrito = [
+    {
+      nombre: "Smartbones Pollo Mini X 8 Unidades",
+      precio: 18360,
+      imagen: "https://i.postimg.cc/xTwTCVBC/2626-Smartbones-Pollo-Mini-8-Unidades-500-X500-removebg-preview.png"
+    },
+    {
+      nombre: "Royal Canin - Medium Adult",
+      precio: 30000,
+      imagen: "https://i.postimg.cc/XYFsd9qW/463-62519-Royal-Canin-Medium-Adulto-1616625484-2186x2186-removebg-preview.png"
+    }
+  ];
+
+  // Función para mostrar notificación
+  function showNotification(message) {
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.style.display = 'block';
+    
+    setTimeout(() => {
+      notification.style.display = 'none';
+    }, 3000);
+  }
+
+  function actualizarCarrito() {
+    const carritoItems = document.getElementById('carritoItems');
+    const contadorCarrito = document.getElementById('contadorCarrito');
+    const carritoTotal = document.getElementById('carritoTotal');
+    
+    carritoItems.innerHTML = '';
+    
+    let total = 0;
+    
+    carrito.forEach(item => {
+      total += item.precio;
+      
+      const itemHTML = `
+        <div class="carrito-item">
+          <img src="${item.imagen}" alt="${item.nombre}">
+          <div class="carrito-item-info">
+            <div class="carrito-item-titulo">${item.nombre}</div>
+            <div class="carrito-item-precio">$${item.precio.toLocaleString()}</div>
+          </div>
+        </div>
+      `;
+      carritoItems.innerHTML += itemHTML;
+    });
+    
+    // Actualizar contador y total
+    contadorCarrito.textContent = carrito.length;
+    carritoTotal.textContent = `$${total.toLocaleString()}`;
+  }
+
+  // Función para vaciar el carrito
+  function vaciarCarrito() {
+    carrito = [];
+    actualizarCarrito();
+    showNotification('Carrito vaciado');
+  }
+
+  // Función para añadir al carrito
+  function agregarAlCarrito(nombre, precio, imagen) {
+    carrito.push({ nombre, precio, imagen });
+    actualizarCarrito();
+    showNotification(`${nombre} agregado al carrito`);
+  }
+
+  // Función para comprar
+  function comprarCarrito() {
+    if (carrito.length === 0) {
+      showNotification('El carrito está vacío');
+      return;
+    }
+    
+    showNotification('Compra realizada con éxito');
+    carrito = [];
+    actualizarCarrito();
+  }
+
+  // Eventos al cargar la página
+  document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar carrito
+    actualizarCarrito();
+    
+    // Evento para botones "Comprar" en productos
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const nombre = e.target.getAttribute('data-name');
+        const precio = parseInt(e.target.parentElement.querySelector('h5:nth-child(3)').textContent.replace('$','').replace('.',''));
+        const imagen = e.target.parentElement.querySelector('img').src;
+        agregarAlCarrito(nombre, precio, imagen);
+      });
+    });
+    
+    // Evento para botones "Añadir" en favoritos
+    document.querySelectorAll('.add-to-cart-fav').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const nombre = e.target.getAttribute('data-name');
+        const precio = nombre.includes('Smartbones') ? 18360 : 
+              nombre.includes('Royal Canin') ? 30000 :
+              nombre.includes('Besties') ? 15000 :
+              nombre.includes('Pedigree') ? 2380 :
+              nombre.includes('Totto') ? 230000 :
+              nombre.includes('Kong') ? 45000 :
+              nombre.includes('Nina') ? 30000 :
+              nombre.includes('Paw Day') ? 30000 :
+              nombre.includes('Bolsas Biodegradables') ? 24000 :
+              nombre.includes('Fresh Breath') ? 60000 :
+              nombre.includes('West Paw') ? 20000 :
+              nombre.includes('Natural Freshly') ? 20000 : 0;
+        const imagen = e.target.parentElement.querySelector('img').src;
+        agregarAlCarrito(nombre, precio, imagen);
+      });
+    });
+    
+    // Evento para vaciar carrito
+    document.getElementById('vaciarCarrito').addEventListener('click', vaciarCarrito);
+    
+    // Evento para comprar
+    document.getElementById('comprarCarrito').addEventListener('click', comprarCarrito);
+    
+    // Modo oscuro
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    }
+    
+    document.querySelector('.icono-tema').addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    });
+  });
+ 
+  function makeResponsive() {
+    // Ajustar menús desplegables en móviles
+    if (window.innerWidth < 768) {
+      document.querySelectorAll('.usuario-menu, .favoritos-menu, .carrito-menu').forEach(menu => {
+        menu.style.width = '95%';
+        menu.style.left = '2.5%';
+        menu.style.right = 'auto';
+      });
+    } else {
+      document.querySelectorAll('.usuario-menu, .favoritos-menu, .carrito-menu').forEach(menu => {
+        menu.style.width = '';
+        menu.style.left = '';
+        menu.style.right = '';
+      });
+    }
+  }
+
+  // Buscador desplegable
+  const buscador = document.querySelector('.buscador');
+  const buscadorInput = document.querySelector('.buscador input');
+  const buscadorBtn = document.querySelector('.buscador button');
+  
+  // Expandir al hacer clic en el botón
+  buscadorBtn.addEventListener('click', function() {
+    buscador.classList.add('expandido');
+    buscadorInput.focus();
+  });
+  
+  // Expandir al hacer focus en el input
+  buscadorInput.addEventListener('focus', function() {
+    buscador.classList.add('expandido');
+  });
+  
+  // Contraer si está vacío al perder el focus
+  buscadorInput.addEventListener('blur', function() {
+    if (!buscadorInput.value) {
+      buscador.classList.remove('expandido');
+    }
+  });
+
+  // Ejecutar al cargar y al cambiar tamaño
+  window.addEventListener('load', makeResponsive);
+  window.addEventListener('resize', makeResponsive);
+  // Chatbot IA
+const chatbotMessages = [
+  { question: "hola", answer: "¡Hola! Soy el asistente virtual de RokDog. ¿En qué puedo ayudarte hoy?" },
+  { question: "productos", answer: "Tenemos una amplia variedad de productos para mascotas: alimentos, juguetes, accesorios y cosméticos. ¿Qué te interesa?" },
+  { question: "envíos", answer: "Realizamos envíos a todo el país. El costo y tiempo de entrega varían según tu ubicación." },
+  { question: "pago", answer: "Aceptamos todas las tarjetas de crédito/débito y transferencias bancarias." },
+  { question: "devoluciones", answer: "Puedes devolver productos dentro de los 15 días posteriores a la compra, siempre que estén en su empaque original." }
+];
+
+document.getElementById('chatbotToggle').addEventListener('click', function() {
+  document.getElementById('chatbotContainer').classList.toggle('open');
+});
+
+document.querySelector('.close-chatbot').addEventListener('click', function() {
+  document.getElementById('chatbotContainer').classList.remove('open');
+});
+
+document.getElementById('sendChatbotMessage').addEventListener('click', sendChatbotMessage);
+document.getElementById('chatbotInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    sendChatbotMessage();
+  }
+});
+
+function sendChatbotMessage() {
+  const input = document.getElementById('chatbotInput');
+  const message = input.value.trim();
+  
+  if (message) {
+    addMessageToChat(message, 'user');
+    input.value = '';
+    
+    // Simular respuesta después de un breve retraso
+    setTimeout(() => {
+      const response = getChatbotResponse(message);
+      addMessageToChat(response, 'bot');
+    }, 500);
+  }
+}
+
+function addMessageToChat(message, sender) {
+  const messagesContainer = document.getElementById('chatbotMessages');
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('chatbot-message', `${sender}-message`);
+  messageElement.textContent = message;
+  messagesContainer.appendChild(messageElement);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function getChatbotResponse(message) {
+  const lowerMessage = message.toLowerCase();
+  
+  // Buscar respuesta coincidente
+  for (const item of chatbotMessages) {
+    if (lowerMessage.includes(item.question)) {
+      return item.answer;
+    }
+  }
+  
+  // Respuesta por defecto
+  return "Lo siento, no entendí tu pregunta. ¿Podrías reformularla? Puedo ayudarte con información sobre productos, envíos, pagos y devoluciones.";
+}
+
+// Mensaje inicial del chatbot cuando se abre
+document.getElementById('chatbotToggle').addEventListener('click', function() {
+  const messagesContainer = document.getElementById('chatbotMessages');
+  if (messagesContainer.children.length === 0 && document.getElementById('chatbotContainer').classList.contains('open')) {
+    addMessageToChat("¡Hola! Soy el asistente virtual de RokDog. ¿En qué puedo ayudarte hoy?", 'bot');
+  }
+});
+// Función para comprar
+function comprarCarrito() {
+  if (carrito.length === 0) {
+    showNotification('El carrito está vacío');
+    return;
+  }
+  
+  // Mostrar modal de pago
+  document.getElementById('modalPago').style.display = 'flex';
+}
+
+// Eventos para el modal de pago
+document.addEventListener('DOMContentLoaded', () => {
+  // ... (código existente)
+  
+  // Evento para comprar
+  document.getElementById('comprarCarrito').addEventListener('click', comprarCarrito);
+  
+  // Cerrar modal
+  document.getElementById('cerrarModal').addEventListener('click', function() {
+    document.getElementById('modalPago').style.display = 'none';
+  });
+  
+  // Seleccionar método de pago
+  document.querySelectorAll('.metodo-pago').forEach(item => {
+    item.addEventListener('click', function() {
+      document.querySelectorAll('.metodo-pago').forEach(m => m.classList.remove('seleccionado'));
+      this.classList.add('seleccionado');
+    });
+  });
+  
+  // Confirmar pago
+  document.getElementById('confirmarPago').addEventListener('click', function() {
+    const metodoSeleccionado = document.querySelector('.metodo-pago.seleccionado');
+    if (!metodoSeleccionado) {
+      showNotification('Por favor selecciona un método de pago');
+      return;
+    }
+    
+    // Ocultar modal de pago
+    document.getElementById('modalPago').style.display = 'none';
+    
+    // Mostrar modal de éxito después de un breve retraso (simulando procesamiento)
+    setTimeout(() => {
+      document.getElementById('modalExito').style.display = 'flex';
+    }, 800);
+  });
+  
+  // Cerrar modal de éxito
+  document.getElementById('cerrarExito').addEventListener('click', function() {
+    document.getElementById('modalExito').style.display = 'none';
+    carrito = [];
+    actualizarCarrito();
+  });
+  
+  // Cerrar modales al hacer clic fuera del contenido
+  document.querySelectorAll('.modal-pago').forEach(modal => {
+    modal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+  
+});
+});
+
+</script>
+
+</body>
+</html>
